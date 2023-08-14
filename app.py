@@ -1,8 +1,6 @@
 from datetime import datetime
-
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
 from data import users, orders, offers
 
 app = Flask(__name__)
@@ -25,9 +23,6 @@ class User(db.Model):
     role = db.Column(db.String(50))
     phone = db.Column(db.String(50))
 
-    # offers = relationship("Offer")
-    # orders = relationship("Order")
-
 
 class Offer(db.Model):
     __tablename__ = "offer"
@@ -35,9 +30,6 @@ class Offer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey("order.id"))
     executor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-    # user = relationship("User")
-    # orders = relationship("Order")
 
 
 class Order(db.Model):
@@ -52,9 +44,6 @@ class Order(db.Model):
     price = db.Column(db.Integer)
     customer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     executor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-    # offer = relationship("Offer")
-    # user = relationship("User")
 
 
 db.drop_all()
@@ -379,4 +368,5 @@ def delete_offer_by_id(uid):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False)
+    # app.run(debug=True, use_reloader=False)
+    app.run()
